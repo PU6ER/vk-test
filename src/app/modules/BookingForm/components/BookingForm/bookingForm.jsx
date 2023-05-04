@@ -2,9 +2,21 @@ import { useEffect, useState } from "react";
 import BookingTower from "../BookingTower/bookingTower";
 import { Form } from "antd";
 import BookingFloor from "../BookingFloor/bookingFloor";
+import BookingRoom from "../BookingRoom/bookingRoom";
+import BookingDate from "../BookingDate/bookingDate";
+import BookingTime from "../BookingTime/bookingTime";
+import BookingComment from "../BookingComment/bookingComment";
+import BookingSubmitButton from "../BookingSubmitButton/bookingSubmitButton";
 
 const BookingForm = () => {
-  const [data, setData] = useState({ tower: "", floor: "" });
+  const [data, setData] = useState({
+    tower: "",
+    floor: "",
+    room: "",
+    date: "",
+    time: "",
+    comment: "",
+  });
 
   const towerOptions = [
     { value: "A", label: "A" },
@@ -60,9 +72,34 @@ const BookingForm = () => {
 
     { label: "27", value: "27" },
   ];
+  const roomOptions = [
+    { label: "1", value: "1" },
+
+    { label: "2", value: "2" },
+
+    { label: "3", value: "3" },
+
+    { label: "4", value: "4" },
+
+    { label: "5", value: "5" },
+
+    { label: "6", value: "6" },
+
+    { label: "7", value: "7" },
+
+    { label: "8", value: "8" },
+
+    { label: "9", value: "9" },
+
+    { label: "10", value: "10" },
+  ];
   const handleSelectChange = (value, name) => {
     setData({ ...data, [name]: value });
     console.log(value);
+  };
+  const handleFinish = (e) => {
+    e.preventDefault();
+    console.log(JSON.stringify(data));
   };
 
   // const [form] = Form.useForm();
@@ -74,7 +111,7 @@ const BookingForm = () => {
   // };
   return (
     <div className="flex flex-col justify-center w-96 shadow p-4 mt-4">
-      <Form>
+      <Form onFinish={handleFinish}>
         <BookingTower
           onChange={handleSelectChange}
           options={towerOptions}
@@ -84,8 +121,16 @@ const BookingForm = () => {
           onChange={handleSelectChange}
           options={floorOptions}
           name="floor"
-          
         />
+        <BookingRoom
+          onChange={handleSelectChange}
+          options={roomOptions}
+          name="room"
+        />
+        <BookingDate onChange={handleSelectChange} type="date" name="date" />
+        <BookingTime onChange={handleSelectChange} type="time" name="time" />
+        <BookingComment onChange={handleSelectChange} name="comment" />
+        <BookingSubmitButton />
       </Form>
     </div>
   );
