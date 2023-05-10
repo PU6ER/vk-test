@@ -1,13 +1,13 @@
 import React from "react";
 import { Form, Select } from "antd";
 
-const BookingRoom = ({onChange, name, options}) => {
+const BookingRoom = ({onChange, name, options, value}) => {
   const handleChange = (value) => {
     onChange(value, name);
   };
   return (
-    <Form.Item label="Номер переговорки">
-      <Select onChange={handleChange} options={options} />
+    <Form.Item label="Номер переговорки" name={name} rules={[{ required: true, message: "Выберете переговорку" }]}>
+      <Select onChange={handleChange} options={options} value={value} />
     </Form.Item>
   );
 };
