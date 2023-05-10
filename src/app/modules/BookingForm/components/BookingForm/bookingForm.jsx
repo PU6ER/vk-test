@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import BookingTower from "../BookingTower/bookingTower";
-import { Form } from "antd";
+import { Form, Typography, Button, Space } from "antd";
+import dayjs from "dayjs";
 import BookingFloor from "../BookingFloor/bookingFloor";
 import BookingRoom from "../BookingRoom/bookingRoom";
 import BookingDate from "../BookingDate/bookingDate";
@@ -17,6 +18,7 @@ const BookingForm = () => {
     time: "",
     comment: "",
   });
+  const [form] = Form.useForm();
 
   const towerOptions = [
     { value: "A", label: "A" },
@@ -93,13 +95,34 @@ const BookingForm = () => {
 
     { label: "10", value: "10" },
   ];
+  const { Title, Text } = Typography;
   const handleSelectChange = (value, name) => {
     setData({ ...data, [name]: value });
     console.log(value);
   };
-  const handleFinish = (e) => {
-    e.preventDefault();
-    console.log(JSON.stringify(data));
+  const handleFinish = () => {
+    console.log(
+      JSON.stringify({
+        ...data,
+        date: data.date ? dayjs(data.date).format("DD/MM/YYYY") : "",
+        time: data.time
+          ? dayjs(data.time[0]).format("HH:mm") +
+            "-" +
+            dayjs(data.time[1]).format("HH:mm")
+          : "",
+      })
+    );
+  };
+  const handleReset = () => {
+    setData({
+      tower: "",
+      floor: "",
+      room: "",
+      date: "",
+      time: "",
+      comment: "",
+    });
+    form.resetFields();
   };
 
   // const [form] = Form.useForm();
@@ -110,29 +133,72 @@ const BookingForm = () => {
   //     console.log('Failed:', errorInfo);
   // };
   return (
-    <div className="flex flex-col justify-center w-96 shadow p-4 mt-4">
-      <Form onFinish={handleFinish}>
-        <BookingTower
-          onChange={handleSelectChange}
-          options={towerOptions}
-          name="tower"
-        />
-        <BookingFloor
-          onChange={handleSelectChange}
-          options={floorOptions}
-          name="floor"
-        />
-        <BookingRoom
-          onChange={handleSelectChange}
-          options={roomOptions}
-          name="room"
-        />
-        <BookingDate onChange={handleSelectChange} type="date" name="date" />
-        <BookingTime onChange={handleSelectChange} type="time" name="time" />
-        <BookingComment onChange={handleSelectChange} name="comment" />
-        <BookingSubmitButton />
-      </Form>
-    </div>
+    <Form
+      form={form}
+      onFinish={handleFinish}
+      className="flex flex-col shadow w-96 p-4"
+      // labelCol={{
+      //   span: 10,
+      // }}
+      // wrapperCol={{
+      //   span: 15,
+      // }}
+      name="form-control"
+    >
+      <div className="flex justify-center">
+        {/* <Text className=" text-2xl mb-4">Форма бронирования</Text> */}
+        <h1 className="text-2xl mb-4 font-bold text-">Форма бронирования</h1>
+      </div>
+      <BookingTower
+        onChange={handleSelectChange}
+        options={towerOptions}
+        name="tower"
+        value={data.tower}
+        form={form}
+      />
+      <BookingFloor
+        onChange={handleSelectChange}
+        options={floorOptions}
+        name="floor"
+        value={data.floor}
+      />
+      <BookingRoom
+        onChange={handleSelectChange}
+        options={roomOptions}
+        name="room"
+        value={data.room}
+      />
+      <BookingDate
+        onChange={handleSelectChange}
+        type="date"
+        name="date"
+        value={data.date}
+      />
+      <BookingTime
+        onChange={handleSelectChange}
+        type="time"
+        name="time"
+        value={data.time}
+      />
+      <BookingComment
+        onChange={handleSelectChange}
+        name="comment"
+        value={data.comment}
+      />
+      <Space>
+        <Button
+          type="primary"
+          htmlType="submit"
+          className=" bg-blue-500 "
+        >
+          Отправить
+        </Button>
+        <Button htmlType="button" onClick={handleReset}>
+          Очистить
+        </Button>
+      </Space>
+      {/* <BookingSubmitButton /> */}
+    </Form>
   );
 };
 
