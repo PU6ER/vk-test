@@ -7,7 +7,6 @@ import BookingRoom from "../BookingRoom/bookingRoom";
 import BookingDate from "../BookingDate/bookingDate";
 import BookingTime from "../BookingTime/bookingTime";
 import BookingComment from "../BookingComment/bookingComment";
-import BookingSubmitButton from "../BookingSubmitButton/bookingSubmitButton";
 
 const BookingForm = () => {
   const [data, setData] = useState({
@@ -125,29 +124,16 @@ const BookingForm = () => {
     form.resetFields();
   };
 
-  // const [form] = Form.useForm();
-  // const onFinish = (values) => {
-  //     console.log('Success:', values);
-  // };
-  // const onFinishFailed = (errorInfo) => {
-  //     console.log('Failed:', errorInfo);
-  // };
+ 
   return (
     <Form
       form={form}
       onFinish={handleFinish}
       className="flex flex-col shadow w-96 p-4"
-      // labelCol={{
-      //   span: 10,
-      // }}
-      // wrapperCol={{
-      //   span: 15,
-      // }}
       name="form-control"
     >
       <div className="flex justify-center">
-        {/* <Text className=" text-2xl mb-4">Форма бронирования</Text> */}
-        <h1 className="text-2xl mb-4 font-bold text-">Форма бронирования</h1>
+        <h1 className="text-2xl mb-4 font-bold text-blue-500">Форма бронирования</h1>
       </div>
       <BookingTower
         onChange={handleSelectChange}
