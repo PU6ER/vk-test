@@ -2,7 +2,7 @@ import BookingForm from "./modules/BookingForm/components/BookingForm/bookingFor
 
 function App() {
   return (
-    <div className="flex justify-center">
+    <div className="flex justify-center h-screen items-center">
       <BookingForm />
     </div>
   );
