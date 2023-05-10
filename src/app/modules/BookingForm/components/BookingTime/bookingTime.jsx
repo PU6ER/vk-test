@@ -1,18 +1,37 @@
 import React from "react";
-import { Form, TimePicker } from "antd";
-import dayjs from "dayjs";
+import { Form, TimePicker, ConfigProvider } from "antd";
 
-const BookingDate = ({ onChange, name }) => {
+
+const BookingDate = ({ onChange, name, value }) => {
   const handleChange = (value) => {
     onChange(
-      dayjs(value[0]).format("HH:mm") + "-" + dayjs(value[1]).format("HH:mm"),
+      value,
       name
     );
   };
   return (
-    <Form.Item label="Время">
-      <TimePicker.RangePicker onChange={handleChange} format="HH:mm" />
-    </Form.Item>
+    <ConfigProvider
+      theme={{
+        components: {
+          Button: {
+            colorBgContainer: "#1677ff",
+          },
+        },
+      }}
+    >
+      <Form.Item
+        label="Время"
+        name={name}
+        rules={[{ required: true, message: "Выберете интервал времени" }]}
+      >
+        <TimePicker.RangePicker
+          onChange={handleChange}
+          format="HH:mm"
+          value={value}
+          popupClassName="bg-no-transparent"
+        />
+      </Form.Item>
+    </ConfigProvider>
   );
 };
 
