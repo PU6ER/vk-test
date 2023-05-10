@@ -97,7 +97,6 @@ const BookingForm = () => {
   const { Title, Text } = Typography;
   const handleSelectChange = (value, name) => {
     setData({ ...data, [name]: value });
-    console.log(value);
   };
   const handleFinish = () => {
     console.log(
