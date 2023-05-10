@@ -6,7 +6,7 @@ const BookingTower = ({options, onChange, name, value, form}) => {
     
   }
   return (
-    <Form.Item name = {name}label="Башня" rules={[{required: true, message:"Выберете башню"},]}>
+    <Form.Item name = {name}label="Башня" rules={[{required: true, message:"Выберите башню"},]}>
         
          
           <Select options={options} onChange={handleChange}  value={value}/>

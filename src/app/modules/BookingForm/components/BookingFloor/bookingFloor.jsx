@@ -9,7 +9,7 @@ const BookingFloor = ({ onChange, name, options, value }) => {
     <Form.Item
       label="Этаж"
       name={name}
-      rules={[{ required: true, message: "Выберете этаж" }]}
+      rules={[{ required: true, message: "Выберите этаж" }]}
     >
       {/* <Select.Option value="">Demo</Select.Option> */}
       <Select onChange={handleChange} options={options} value={value} />

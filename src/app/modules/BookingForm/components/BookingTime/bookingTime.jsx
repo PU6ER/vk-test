@@ -22,7 +22,7 @@ const BookingDate = ({ onChange, name, value }) => {
       <Form.Item
         label="Время"
         name={name}
-        rules={[{ required: true, message: "Выберете интервал времени" }]}
+        rules={[{ required: true, message: "Выберите интервал времени" }]}
       >
         <TimePicker.RangePicker
           onChange={handleChange}

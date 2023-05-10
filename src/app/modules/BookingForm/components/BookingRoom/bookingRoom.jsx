@@ -6,7 +6,7 @@ const BookingRoom = ({onChange, name, options, value}) => {
     onChange(value, name);
   };
   return (
-    <Form.Item label="Номер переговорки" name={name} rules={[{ required: true, message: "Выберете переговорку" }]}>
+    <Form.Item label="Номер переговорки" name={name} rules={[{ required: true, message: "Выберите переговорку" }]}>
       <Select onChange={handleChange} options={options} value={value} />
     </Form.Item>
   );

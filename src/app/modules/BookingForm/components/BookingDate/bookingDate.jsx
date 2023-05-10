@@ -11,7 +11,7 @@ const BookingDate = ({ onChange, name, type, value }) => {
     <Form.Item
       label="Дата"
       name={name}
-      rules={[{ required: true, message: "Выберете дату" }]}
+      rules={[{ required: true, message: "Выберите дату" }]}
     >
       <DatePicker onChange={handleChange} type={type} value={value} />
     </Form.Item>
